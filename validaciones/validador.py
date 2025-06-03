@@ -1,0 +1,1 @@
+# Funciones para validar tipos, nulos, duplicados

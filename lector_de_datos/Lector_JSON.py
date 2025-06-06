@@ -10,7 +10,7 @@ class LectorJSON(Dataset):
         
         try:
             # se asegura que siempre sea un dataframe.
-            self.datos = pd.read_json(self.fuente)
+            self.datos = pd.read_json(self.fuente,lines=True)
             print(f"archivo json cargado desde: {self.fuente}")
         except Exception as e:
             # se captura la excepcion y se muestra un mensaje de error.

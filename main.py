@@ -1,6 +1,8 @@
 import os
 from lector_de_datos.lector_csv import LectorCSV
 from lector_de_datos.lector_json import LectorJSON
+from lector_de_datos.lector_xlsx import LectorXLSX
+
 from validaciones.validador import ValidadorDatos
 from persistencia.data_saver import DataSaver
 
@@ -18,12 +20,15 @@ def procesar_archivo(archivo: str, carpeta_archivos: str, saver: DataSaver):
     elif archivo.endswith(".json"):
         #se crea una instancia de 'lectorjson'.
         lector = LectorJSON(ruta_completa)
+    elif archivo.endswith(".xlsx"):
+        #se crea una instancia de 'lectorxlsx'.
+        lector = LectorXLSX(ruta_completa)
     else:
         
         print(f"error de al procesar archivo: {archivo}")
         return
 
-    # cargar los datos desde la fuente (csv o json) usando el lector.
+    # cargar los datos desde la fuente (csv,json,excel) usando el lector.
     lector.cargar_datos()
     #aplicar transformaciones estandar a los datos cargados.
     lector.transformar_datos()

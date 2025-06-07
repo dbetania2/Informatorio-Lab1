@@ -8,4 +8,6 @@ Para el desarrollo de este programa, se han utilizado los siguientes datasets:
 
 * **JSON:** [Students Grading Dataset](https://www.kaggle.com/datasets/mahmoudelhemaly/students-grading-dataset/data)
 * **CSV:** [Extrovert vs Introvert Behavior Data](https://www.kaggle.com/datasets/rakeshkapilavai/extrovert-vs-introvert-behavior-data)
+* **XLSX:** [HR Employee Analytics](https://www.kaggle.com/datasets/kmldas/hr-employee-data-descriptive-analytics)
 
+resumen:

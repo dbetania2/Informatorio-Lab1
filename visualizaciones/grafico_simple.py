@@ -16,33 +16,21 @@ class GraficoSimple:
         self.df = df
 
     def mostrar_histograma(self, columna: str):
-        
-        #la funcion realiza validaciones para asegurar que la columna exista y que sea de tipo numerico antes de intentar crear el grafico.
-        
-        # verifica si la columna especificada existe en el dataframe.
         if columna not in self.df.columns:
             print(f"columna '{columna}' no encontrada.")
-            return # sale de la funcion si la columna no existe.
+            return
 
-        # verifica si la columna es de tipo numerico.
         if not pd.api.types.is_numeric_dtype(self.df[columna]):
             print(f"columna '{columna}' no es numerica.")
-            return # sale de la funcion si la columna no es numerica.
+            return
 
-        # crea el histograma usando seaborn.histplot.
-        # 'self.df[columna]': los datos de la columna seleccionada.
-        # 'kde=false': desactiva la estimacion de densidad del kernel.
-        # 'bins=10': divide el rango de datos en 10 barras (bins).
-        sns.histplot(self.df[columna], kde=False, bins=10)
-        
-        # configura el titulo del grafico.
-        plt.title(f"histograma de {columna}")
-        # configura la etiqueta del eje x.
+        datos = self.df[columna].dropna().round(0)  # 👈 Redondea los valores al entero más cercano
+
+        sns.histplot(datos, bins=10, kde=False)
+
+        plt.title(f"histograma de {columna} (redondeado)")
         plt.xlabel(columna)
-        # configura la etiqueta del eje y.
         plt.ylabel("frecuencia")
-        
-        # ajusta automaticamente los parametros de la trama para que encajen en el area de la figura.
         plt.tight_layout()
-        # muestra el grafico.
         plt.show()
+

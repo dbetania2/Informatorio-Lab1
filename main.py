@@ -45,6 +45,7 @@ def procesar_archivo(archivo: str, carpeta_archivos: str, saver: DataSaver):
     validador.validar_tipos()
     validador.validar_nulos()
     validador.validar_duplicados()
+    validador.limpiar_nulos()
 
     #guardar el dataframe.
     # se obtiene el nombre de la tabla de la base de datos a partir del nombre del archivoeliminando su extension.
@@ -61,6 +62,7 @@ def procesar_archivo(archivo: str, carpeta_archivos: str, saver: DataSaver):
 
     # si se encontro una columna numerica, procede con el analisis y la visualizacion.
     if columna:
+
     # inicializa una instancia de 'analisisbasico' con el dataframe actual.
         analisis = AnalisisBasico(df)
     # llama al metodo para mostrar las estadisticas de la columna numerica encontrada.

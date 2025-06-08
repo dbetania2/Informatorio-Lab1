@@ -6,6 +6,9 @@ from lector_de_datos.lector_xlsx import LectorXLSX
 from validaciones.validador import ValidadorDatos
 from persistencia.data_saver import DataSaver
 
+from estadisticas.analisis_basico import AnalisisBasico
+from visualizaciones.grafico_simple import GraficoSimple
+
 def procesar_archivo(archivo: str, carpeta_archivos: str, saver: DataSaver):
     
     #encapsula la logica completa para procesar un unico archivo de datos.
@@ -46,6 +49,31 @@ def procesar_archivo(archivo: str, carpeta_archivos: str, saver: DataSaver):
     #guardar el dataframe.
     # se obtiene el nombre de la tabla de la base de datos a partir del nombre del archivoeliminando su extension.
     nombre_tabla = os.path.splitext(archivo)[0]
+
+    # mostrar estadistica y grafico simple
+    print(f"\n--- analisis para '{archivo}' ---")
+
+    # intenta encontrar la primera columna numerica en el dataframe.
+    # 'select_dtypes(include=["number"])' selecciona solo las columnas de tipo numerico.
+    # '.columns[0]' toma el nombre de la primera de esas columnas.
+    # 'if not ... empty else none' maneja el caso donde no hay columnas numericas.
+    columna = df.select_dtypes(include=["number"]).columns[0] if not df.select_dtypes(include=["number"]).empty else None
+
+    # si se encontro una columna numerica, procede con el analisis y la visualizacion.
+    if columna:
+    # inicializa una instancia de 'analisisbasico' con el dataframe actual.
+        analisis = AnalisisBasico(df)
+    # llama al metodo para mostrar las estadisticas de la columna numerica encontrada.
+        analisis.mostrar_estadisticas(columna)
+
+    # inicializa una instancia de 'graficosimple' con el dataframe actual.
+        grafico = GraficoSimple(df)
+    # llama al metodo para mostrar el histograma de la columna numerica.
+        grafico.mostrar_histograma(columna)
+    else:
+    # si no se encuentra ninguna columna numerica en el dataframe, imprime un mensaje.
+        print("no se encontro una columna numerica para analisis.")
+
     # persistencia de datos
     saver.guardar_dataframe(df, nombre_tabla)
 

@@ -5,8 +5,7 @@ import pandas as pd
 class GraficoSimple:
     """
     clase dedicada a la creacion y visualizacion de graficos basicos a modo de practica y ejemplo
-    a partir de un dataframe de pandas, utilizando las librerias
-    seaborn y matplotlib.
+    a partir de un dataframe de pandas, utilizando las libreriasseaborn y matplotlib.
     """
     def __init__(self, df: pd.DataFrame):
         
@@ -24,7 +23,7 @@ class GraficoSimple:
             print(f"columna '{columna}' no es numerica.")
             return
 
-        datos = self.df[columna].dropna().round(0)  # 👈 Redondea los valores al entero más cercano
+        datos = self.df[columna].dropna().round(0)  #Redondea los valores al entero más cercano
 
         sns.histplot(datos, bins=10, kde=False)
 
